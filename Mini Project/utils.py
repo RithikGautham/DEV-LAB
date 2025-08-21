@@ -1,19 +1,13 @@
 import pandas as pd
 
 def load_data(filepath):
-    """
-    Load and clean HURDAT2 cyclone dataset.
-    """
     df = pd.read_csv(filepath)
     
-    # Normalize column names
     df.columns = df.columns.str.strip().str.lower()
 
-    # Convert date
     if "date" in df.columns:
         df["date"] = pd.to_datetime(df["date"], errors="coerce")
 
-    # Fix latitude & longitude (convert from 28.0N / 94.8W → numeric)
     def convert_lat(val):
         if isinstance(val, str) and val[-1] in ["N","S"]:
             num = float(val[:-1])
@@ -32,3 +26,4 @@ def load_data(filepath):
         df["longitude"] = df["longitude"].apply(convert_lon)
 
     return df
+
