@@ -2,9 +2,6 @@ import folium
 import plotly.express as px
 
 def plot_cyclone_path(df, cyclone_name):
-    """
-    Create Folium map for a selected cyclone.
-    """
     cyclone_data = df[df["storm_name"].str.upper() == cyclone_name.upper()]
 
     if cyclone_data.empty:
@@ -29,9 +26,6 @@ def plot_cyclone_path(df, cyclone_name):
 
 
 def plot_intensity(df, cyclone_name):
-    """
-    Create Plotly chart of cyclone wind speed over time.
-    """
     cyclone_data = df[df["storm_name"].str.upper() == cyclone_name.upper()]
 
     if "date" not in cyclone_data.columns:
@@ -45,3 +39,4 @@ def plot_intensity(df, cyclone_name):
         labels={"maximum_sustained_wind_knots": "Wind Speed (kt)"}
     )
     return fig
+
